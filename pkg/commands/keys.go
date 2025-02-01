@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"infoseciitr/slack-bot/pkg/blockkit"
 	"infoseciitr/slack-bot/pkg/log"
-	"infoseciitr/slack-bot/services"
+	"infoseciitr/slack-bot/pkg/services"
 	"log/slog"
 	"strings"
 

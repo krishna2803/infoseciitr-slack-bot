@@ -1,7 +1,7 @@
 package blockkit
 
 import (
-	"infoseciitr/slack-bot/models"
+	"infoseciitr/slack-bot/pkg/models"
 
 	"github.com/slack-go/slack"
 )

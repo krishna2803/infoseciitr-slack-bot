@@ -2,9 +2,9 @@ package services
 
 import (
 	"fmt"
-	"infoseciitr/slack-bot/models"
 	"infoseciitr/slack-bot/pkg/database"
 	"infoseciitr/slack-bot/pkg/log"
+	"infoseciitr/slack-bot/pkg/models"
 	"log/slog"
 	"slices"
 )

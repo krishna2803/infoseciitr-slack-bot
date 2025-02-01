@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"infoseciitr/slack-bot/models"
 	"infoseciitr/slack-bot/pkg/log"
+	"infoseciitr/slack-bot/pkg/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
