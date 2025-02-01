@@ -61,6 +61,11 @@ func TransferKeys(username string, name string) error {
 	if key.Name == "" {
 		log.GetLogger().Warn("Key not found. Assigning to anon", slog.String("Name", name))
 
+		key = models.Key{
+			Owner: username,
+			Name:  name,
+		}
+
 		database.DB.Create(&key)
 
 		return nil
