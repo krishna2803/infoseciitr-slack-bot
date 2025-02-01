@@ -5,6 +5,7 @@ import (
 	"infoseciitr/slack-bot/pkg/blockkit"
 	"infoseciitr/slack-bot/pkg/log"
 	"infoseciitr/slack-bot/pkg/services"
+	"infoseciitr/slack-bot/pkg/utils"
 	"log/slog"
 	"strings"
 
@@ -68,6 +69,10 @@ func HandlleTransferKeys() *slacker.CommandDefinition {
 			}
 
 			log.GetLogger().Info("Received", slog.String("command", fmt.Sprintf("%s has the %s keys", username, name)))
+
+			username = utils.Unleetify(username)
+
+			log.GetLogger().Info("Unleetified", slog.String("username", username))
 
 			err := services.TransferKeys(username, name)
 
