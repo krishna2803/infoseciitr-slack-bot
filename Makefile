@@ -28,6 +28,10 @@ build:
 	@$(GO) build -o $(BUILD_OUTPUT) $(BUILD_INPUT)
 	@echo "Built as $(BUILD_OUTPUT)"
 
+run: build
+	@echo "Running..."
+	@$(BUILD_OUTPUT)
+	
 format:
 	@echo "Formatting..."
 	@$(GO) fmt $(GO_PACKAGES)
