@@ -1,0 +1,22 @@
+services:
+  slack-bot:
+    build: .
+    depends_on:
+      - infoseciitr-db
+    environment:
+      - DB_HOST=infoseciitr-db
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
+      - DB_PASS=${DB_PASS}
+
+  infoseciitr-db:
+    image: postgres:alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+
+volumes:
+  postgres_data:
