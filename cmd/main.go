@@ -5,7 +5,7 @@ import (
 	"infoseciitr/slack-bot/pkg/commands"
 	"infoseciitr/slack-bot/pkg/database"
 	"infoseciitr/slack-bot/pkg/log"
-	"infoseciitr/slack-bot/utils"
+	"infoseciitr/slack-bot/pkg/utils"
 
 	"github.com/slack-io/slacker"
 )
