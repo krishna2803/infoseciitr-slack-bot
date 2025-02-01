@@ -2,7 +2,7 @@ package log
 
 import (
 	"errors"
-	"infosec/key-bot/utils"
+	"infoseciitr/slack-bot/utils"
 	"log/slog"
 	"os"
 

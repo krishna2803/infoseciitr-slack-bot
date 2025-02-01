@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"infosec/key-bot/models"
-	"infosec/key-bot/pkg/log"
+	"infoseciitr/slack-bot/models"
+	"infoseciitr/slack-bot/pkg/log"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

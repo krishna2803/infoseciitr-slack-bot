@@ -2,16 +2,18 @@ package main
 
 import (
 	"context"
-	"infosec/key-bot/pkg/commands"
-	"infosec/key-bot/pkg/database"
-	"infosec/key-bot/pkg/log"
-	"infosec/key-bot/utils"
+	"infoseciitr/slack-bot/pkg/commands"
+	"infoseciitr/slack-bot/pkg/database"
+	"infoseciitr/slack-bot/pkg/log"
+	"infoseciitr/slack-bot/utils"
 
 	"github.com/slack-io/slacker"
 )
 
 func registerCommands(cmdgroup *slacker.CommandGroup) {
 	cmdgroup.AddCommand(commands.HandlePing())
+	cmdgroup.AddCommand(commands.HandleWhoHasTheKeys())
+	cmdgroup.AddCommand(commands.HandlleTransferKeys())
 }
 
 func initialize() *slacker.Slacker {
@@ -28,7 +30,7 @@ func initialize() *slacker.Slacker {
 		slackBotToken,
 		slackAppToken,
 		slacker.WithLogger(log.GetLogger()),
-		slacker.WithBotMode(slacker.BotModeIgnoreNone),
+		slacker.WithBotMode(slacker.BotModeIgnoreAll),
 	)
 
 	cmdgroup := bot.AddCommandGroup("bot")

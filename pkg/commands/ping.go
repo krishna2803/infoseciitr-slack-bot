@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"infosec/key-bot/pkg/log"
+	"infoseciitr/slack-bot/pkg/log"
 	"log/slog"
 
 	"github.com/slack-io/slacker"
