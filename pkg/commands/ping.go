@@ -10,8 +10,8 @@ import (
 func HandlePing() *slacker.CommandDefinition {
 	return &slacker.CommandDefinition{
 		Description: "Pings the bot",
-		Examples:    []string{"bot ping"},
 		Command:     "ping",
+		Examples:    []string{"bot ping"},
 		Handler: func(ctx *slacker.CommandContext) {
 			log.GetLogger().Info("Received", slog.String("command", "ping"))
 

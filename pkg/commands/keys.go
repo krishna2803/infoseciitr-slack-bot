@@ -18,8 +18,8 @@ const (
 func HandleWhoHasTheKeys() *slacker.CommandDefinition {
 	return &slacker.CommandDefinition{
 		Description: "Fetches the current key owners",
-		Examples:    []string{"bot who has the keys"},
 		Command:     "who has the keys",
+		Examples:    []string{"bot who has the keys"},
 		Handler: func(ctx *slacker.CommandContext) {
 			log.GetLogger().Info("Received", slog.String("command", "who has the keys"))
 
@@ -49,20 +49,22 @@ func HandleWhoHasTheKeys() *slacker.CommandDefinition {
 func HandlleTransferKeys() *slacker.CommandDefinition {
 	return &slacker.CommandDefinition{
 		Description: "Sets `username` or you as the owner of the key `name`",
-		Examples:    []string{"bot username has the name keys", "bot i have the name keys"},
 		Command:     "{username} has the {name} keys",
+		Aliases: []string{
+			"bot {username} have the {name} keys", // i hate doing this, but i must because slacker api is trash.
+		},
+		Examples: []string{
+			"bot segfault has the master keys",
+			"bot i have the master keys",
+		},
 		Handler: func(ctx *slacker.CommandContext) {
 
 			username := strings.TrimSpace(strings.ToLower(ctx.Request().Param("username")))
 			name := strings.TrimSpace(strings.ToLower(ctx.Request().Param("name")))
 
 			if username == iUsername {
+				log.GetLogger().Info("Received", slog.String("command", fmt.Sprintf("i have the %s keys", name)))
 				username = ctx.Event().UserProfile.DisplayNameNormalized
-				_, err := ctx.Response().Reply(fmt.Sprintf("*%s* has the %s keys", username, name))
-				if err != nil {
-					log.GetLogger().Error("Error in HandleWhoHasTheKeys", slog.String("error", err.Error()))
-				}
-				return
 			}
 
 			log.GetLogger().Info("Received", slog.String("command", fmt.Sprintf("%s has the %s keys", username, name)))
