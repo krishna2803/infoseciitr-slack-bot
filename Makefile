@@ -21,6 +21,7 @@ help:
 	@echo "format  - Format code using golangci-lint"
 	@echo "help    - Prints help message"
 	@echo "lint    - Lint code using golangci-lint"
+	@echo "format    - Fromat code using golangci-lint"
 
 build:
 	@echo "Building..."

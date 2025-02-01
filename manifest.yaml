@@ -2,8 +2,8 @@ _metadata:
   major_version: 1
   minor_version: 1
 display_information:
-  name: Slack Bot
-  description: teeny tiny bot uwu
+  name: InfoSecIITR Slack Bot
+  description: Beep Boop
   background_color: "#323336"
 features:
   app_home:
