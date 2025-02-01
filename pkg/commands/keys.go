@@ -11,6 +11,10 @@ import (
 	"github.com/slack-io/slacker"
 )
 
+const (
+	iUsername = "i"
+)
+
 func HandleWhoHasTheKeys() *slacker.CommandDefinition {
 	return &slacker.CommandDefinition{
 		Description: "Fetches the current key owners",
@@ -44,13 +48,22 @@ func HandleWhoHasTheKeys() *slacker.CommandDefinition {
 
 func HandlleTransferKeys() *slacker.CommandDefinition {
 	return &slacker.CommandDefinition{
-		Description: "Sets `username` as the owner of the key `name`",
-		Examples:    []string{"bot username has the name keys"},
+		Description: "Sets `username` or you as the owner of the key `name`",
+		Examples:    []string{"bot username has the name keys", "bot i have the name keys"},
 		Command:     "{username} has the {name} keys",
 		Handler: func(ctx *slacker.CommandContext) {
 
 			username := strings.TrimSpace(strings.ToLower(ctx.Request().Param("username")))
 			name := strings.TrimSpace(strings.ToLower(ctx.Request().Param("name")))
+
+			if username == iUsername {
+				username = ctx.Event().UserProfile.DisplayNameNormalized
+				_, err := ctx.Response().Reply(fmt.Sprintf("*%s* has the %s keys", username, name))
+				if err != nil {
+					log.GetLogger().Error("Error in HandleWhoHasTheKeys", slog.String("error", err.Error()))
+				}
+				return
+			}
 
 			log.GetLogger().Info("Received", slog.String("command", fmt.Sprintf("%s has the %s keys", username, name)))
 
@@ -64,7 +77,7 @@ func HandlleTransferKeys() *slacker.CommandDefinition {
 				return
 			}
 
-			msg := fmt.Sprintf("%s has the %s keys", username, name)
+			msg := fmt.Sprintf("*%s* has the %s keys", username, name)
 
 			_, err = ctx.Response().Reply(msg)
 

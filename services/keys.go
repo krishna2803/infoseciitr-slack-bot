@@ -34,7 +34,12 @@ func WhoHasTheKeys() []models.Key {
 				Name:  key,
 			})
 
-			database.DB.Save(&key)
+			mKey := models.Key{
+				Owner: "anon",
+				Name:  key,
+			}
+
+			database.DB.Create(&mKey)
 		}
 	}
 
@@ -51,14 +56,19 @@ func TransferKeys(username string, name string) error {
 		return fmt.Errorf("Invalid key: %s", name)
 	}
 
-	log.GetLogger().Info("Transferred Keys", slog.String("Owner", username), slog.String("Name", name))
+	var key models.Key
+	database.DB.Where("name = ?", name).First(&key)
+	if key.Name == "" {
+		log.GetLogger().Warn("Key not found. Assigning to anon", slog.String("Name", name))
 
-	key := models.Key{
-		Owner: username,
-		Name:  name,
+		database.DB.Create(&key)
+
+		return nil
 	}
 
-	database.DB.Save(&key)
+	database.DB.Model(&models.Key{}).Where("name = ?", name).Update("owner", username)
+
+	log.GetLogger().Info("Transferred Keys", slog.String("Owner", username), slog.String("Name", name))
 
 	return nil
 }

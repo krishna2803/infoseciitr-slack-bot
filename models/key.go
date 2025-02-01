@@ -7,6 +7,6 @@ import (
 type Key struct {
 	gorm.Model
 	Owner string
-	Name  string
+	Name  string `gorm:"unique"`
 	// TransferredBy string `json:"transferred_by"` // TODO: not needed as of now
 }
